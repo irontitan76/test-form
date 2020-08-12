@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { createMuiTheme } from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { CssBaseline, createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { blue, grey } from '@material-ui/core/colors';
+
+import App from './App';
+import Secure from './Secure';
+import * as serviceWorker from './serviceWorker';
 
 const theme = createMuiTheme({
   palette: {
@@ -18,6 +21,7 @@ const theme = createMuiTheme({
       light: grey[300],
       main: grey[500],
     },
+    type: 'dark',
   },
   shape: {
     borderRadius: 0,
@@ -27,7 +31,17 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <CssBaseline />
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <App />
+          </Route>
+          <Route exact path='/secure'>
+            <Secure />
+          </Route>
+        </Switch>
+      </Router>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
